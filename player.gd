@@ -42,10 +42,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			velocidade_atual = min(velocidade_atual + incremento_velocidade, velocidade_max)
-			print("Velocidade: %.1f" % velocidade_atual)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			velocidade_atual = max(velocidade_atual - incremento_velocidade, velocidade_min)
-			print("Velocidade: %.1f" % velocidade_atual)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Rotação da câmera apenas quando o mouse está capturado
@@ -67,7 +65,6 @@ func _physics_process(delta: float) -> void:
 	# Toggle fly mode
 	if Input.is_action_just_pressed("Fly"):
 		fly_mode = !fly_mode
-		print("Fly Mode: ", "ATIVADO" if fly_mode else "DESATIVADO")
 	
 	if fly_mode:
 		# Modo fly - movimento livre sem gravidade e colisão

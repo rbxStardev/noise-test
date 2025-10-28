@@ -8,8 +8,9 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
-velocidade_base = 7.0
-velocidade_max = 32.0
+velocidade_base = 16.0
+velocidade_min = 16.0
+velocidade_max = 64.0
 desaceleracao = 20.0
 mouse_sensitivity = 0.01
 

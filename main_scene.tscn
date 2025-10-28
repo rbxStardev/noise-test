@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvu2t535ahbdb"]
+[gd_scene load_steps=10 format=3 uid="uid://bvu2t535ahbdb"]
 
 [ext_resource type="Script" uid="uid://cyeug2ivfucwh" path="res://main_scene.gd" id="1_0f027"]
 [ext_resource type="PackedScene" uid="uid://bsvh0jg1b5grs" path="res://player.tscn" id="2_2c62f"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2c62f"]
+[ext_resource type="Script" uid="uid://dilu7b083c4ea" path="res://mesh_instance_3d.gd" id="3_gyfs4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0f027"]
 
@@ -14,44 +13,37 @@ sky_material = SubResource("ProceduralSkyMaterial_0f027")
 background_mode = 2
 sky = SubResource("Sky_2c62f")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c62f"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyfs4"]
 albedo_color = Color(0.27058825, 1, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5x1h"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_d5x1h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c62f"]
 vertex_color_use_as_albedo = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
-material = SubResource("StandardMaterial3D_d5x1h")
-
-[sub_resource type="MultiMesh" id="MultiMesh_hq1ik"]
-transform_format = 1
-use_colors = true
-mesh = SubResource("BoxMesh_8mm7a")
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_0f027")
-world_size = Vector3(512, 128, 512)
-noise = SubResource("FastNoiseLite_2c62f")
+world_size = Vector3(512, 64, 512)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gyfs4")
 
-[node name="DefaultCube" type="CSGBox3D" parent="."]
-use_collision = true
-material = SubResource("StandardMaterial3D_2c62f")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.6516484, -0.5824456, 0.48591292, -2.9802322e-08, 0.6406057, 0.76786995, -0.75852114, -0.5003813, 0.41744965, 8.579981, 8.380213, 3.2743466)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Floor" type="CSGBox3D" parent="."]
 use_collision = true
-size = Vector3(256, 0, 256)
+size = Vector3(512, 0, 512)
 material = SubResource("StandardMaterial3D_gyfs4")
 
 [node name="Player" parent="." instance=ExtResource("2_2c62f")]
-transform = Transform3D(-0.28911534, 0, -0.9572943, 0, 1, 0, 0.9572943, 0, -0.28911534, 0, 34.502277, 0)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 256, 32, 256)
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-multimesh = SubResource("MultiMesh_hq1ik")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_d5x1h")
+script = ExtResource("3_gyfs4")
+material = SubResource("StandardMaterial3D_2c62f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
