@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvu2t535ahbdb"]
+[gd_scene load_steps=7 format=3 uid="uid://bvu2t535ahbdb"]
 
-[ext_resource type="Script" uid="uid://cyeug2ivfucwh" path="res://main_scene.gd" id="1_0f027"]
 [ext_resource type="PackedScene" uid="uid://bsvh0jg1b5grs" path="res://player.tscn" id="2_2c62f"]
-[ext_resource type="Script" uid="uid://dilu7b083c4ea" path="res://mesh_instance_3d.gd" id="3_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://h2lmk5jw5ok7" path="res://chunk_manager.tscn" id="3_gyfs4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0f027"]
 
@@ -16,14 +15,7 @@ sky = SubResource("Sky_2c62f")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyfs4"]
 albedo_color = Color(0.27058825, 1, 1, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_d5x1h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c62f"]
-vertex_color_use_as_albedo = true
-
 [node name="MainScene" type="Node3D"]
-script = ExtResource("1_0f027")
-world_size = Vector3(512, 64, 512)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gyfs4")
@@ -37,13 +29,7 @@ size = Vector3(512, 0, 512)
 material = SubResource("StandardMaterial3D_gyfs4")
 
 [node name="Player" parent="." instance=ExtResource("2_2c62f")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 256, 32, 256)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -280.4899, 128, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_d5x1h")
-script = ExtResource("3_gyfs4")
-material = SubResource("StandardMaterial3D_2c62f")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="ChunkManager" parent="." instance=ExtResource("3_gyfs4")]
+dimensions = Vector3(512, 64, 512)

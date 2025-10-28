@@ -90,6 +90,8 @@ func _physics_process(delta: float) -> void:
 		# Move sem usar velocity e move_and_slide (movimento direto)
 		if direction:
 			global_position += direction * velocidade_atual * delta
+		
+		velocity = Vector3.ZERO
 	else:
 		# Modo normal - com gravidade e colisão
 		# Adiciona gravidade
