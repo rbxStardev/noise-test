@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsvh0jg1b5grs"]
+
+[ext_resource type="Script" uid="uid://bhoi36ekiww1a" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
+velocidade_base = 7.0
+velocidade_max = 32.0
+desaceleracao = 20.0
+mouse_sensitivity = 0.01
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_onrkg")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
